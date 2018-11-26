@@ -1,0 +1,57 @@
+---
+title: "Flexdashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+
+data(rest_inspec)
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Number of restaurants of different scores
+```{r scatterplots}
+rest_inspec %>%
+  filter(!is.na(score)) %>% 
+  count(score) %>%
+  plot_ly(x = ~score, y = ~n, 
+          type = "scatter", mode = "markers", 
+          alpha = 0.5)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Distribution of scores in different boroughs
+```{r boxplot}
+rest_inspec %>%
+  filter(!is.na(score), boro != "Missing") %>% 
+  plot_ly(y = ~score, color = ~boro, 
+          type = "box", colors = "Set2")
+```
+
+### Number of A grade pizza restaurants in different boroughs
+
+```{r barplot}
+rest_inspec %>% 
+  filter(str_detect(dba, "[Pp][Ii][Zz][Zz][Aa]")) %>% 
+  group_by(boro, grade) %>% 
+  summarize(n = n()) %>% 
+  spread(key = grade, value = n) %>%
+  plot_ly(x = ~boro, y = ~A, color = ~boro, type = "bar")
+```
+
+```{r knit, eval=FALSE}
+rmarkdown::render("plotly.Rmd", output_format = "flex_dashboard")
+```
+
