@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Linear Regression</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="geo_plotly.html">Geomap</a>
+</li>
+<li>
+  <a href="https://github.com/tiffanyxi/p8105_final_hiv">Final data repo</a>
+</li>
+<li>
+  <a href="https://github.com/litianapp/p8105_final_hiv.github.io">Final website repo</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Linear Regression</h1>
+
+</div>
+
+
+<div id="hiv-diagnoses" class="section level3">
+<h3>HIV diagnoses</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">0.983</td>
+<td align="right">0.302</td>
+<td align="right">3.252</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="even">
+<td align="left">boroughBrooklyn</td>
+<td align="right">0.297</td>
+<td align="right">0.281</td>
+<td align="right">1.060</td>
+<td align="right">0.289</td>
+</tr>
+<tr class="odd">
+<td align="left">boroughManhattan</td>
+<td align="right">3.091</td>
+<td align="right">0.331</td>
+<td align="right">9.332</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">boroughQueens</td>
+<td align="right">-1.245</td>
+<td align="right">0.259</td>
+<td align="right">-4.811</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">boroughStaten Island</td>
+<td align="right">-4.376</td>
+<td align="right">0.397</td>
+<td align="right">-11.016</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">genderMale</td>
+<td align="right">6.083</td>
+<td align="right">0.152</td>
+<td align="right">40.138</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">age20 - 29</td>
+<td align="right">9.600</td>
+<td align="right">0.262</td>
+<td align="right">36.576</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">age30 - 39</td>
+<td align="right">6.870</td>
+<td align="right">0.262</td>
+<td align="right">26.175</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">age40 - 49</td>
+<td align="right">4.627</td>
+<td align="right">0.262</td>
+<td align="right">17.627</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">age50 - 59</td>
+<td align="right">2.355</td>
+<td align="right">0.262</td>
+<td align="right">8.972</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">age60+</td>
+<td align="right">0.427</td>
+<td align="right">0.262</td>
+<td align="right">1.626</td>
+<td align="right">0.104</td>
+</tr>
+<tr class="even">
+<td align="left">mid_income</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">-17.851</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">5.143</td>
+<td align="right">0.514</td>
+<td align="right">10.001</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">boroughBrooklyn</td>
+<td align="right">0.357</td>
+<td align="right">0.493</td>
+<td align="right">0.724</td>
+<td align="right">0.469</td>
+</tr>
+<tr class="odd">
+<td align="left">boroughManhattan</td>
+<td align="right">3.710</td>
+<td align="right">0.582</td>
+<td align="right">6.376</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">boroughQueens</td>
+<td align="right">-1.494</td>
+<td align="right">0.454</td>
+<td align="right">-3.287</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="odd">
+<td align="left">boroughStaten Island</td>
+<td align="right">-5.251</td>
+<td align="right">0.698</td>
+<td align="right">-7.527</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">genderMale</td>
+<td align="right">7.299</td>
+<td align="right">0.266</td>
+<td align="right">27.425</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">raceAsian/Pacific Islander</td>
+<td align="right">-3.628</td>
+<td align="right">0.421</td>
+<td align="right">-8.621</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">raceBlack</td>
+<td align="right">7.304</td>
+<td align="right">0.421</td>
+<td align="right">17.357</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">raceLatino/Hispanic</td>
+<td align="right">5.399</td>
+<td align="right">0.421</td>
+<td align="right">12.829</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">raceOther/Unknown</td>
+<td align="right">-5.008</td>
+<td align="right">0.421</td>
+<td align="right">-11.900</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_income</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">-12.197</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interpretation</strong>: HIV incidence among male are significantly higher than that among female, which can be explained by gender differences with respect to HIV/AIDS depend on patterns of disease transmission. HIV incidence in adults aged 20 to 29, 30 to 39, 40 to 49 and 50 to 59 are all significantly higher than young people aged 13 to 19. HIV incidence in Black and Latino/Hispanic population are significantly higher than that in white population. The effect of income is not significant.</p>
+</div>
+<div id="hiv-related-death-rate" class="section level3">
+<h3>HIV related death rate</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">2.249</td>
+<td align="right">0.416</td>
+<td align="right">5.403</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">boroughBrooklyn</td>
+<td align="right">0.100</td>
+<td align="right">0.386</td>
+<td align="right">0.259</td>
+<td align="right">0.796</td>
+</tr>
+<tr class="odd">
+<td align="left">boroughManhattan</td>
+<td align="right">0.118</td>
+<td align="right">0.454</td>
+<td align="right">0.260</td>
+<td align="right">0.795</td>
+</tr>
+<tr class="even">
+<td align="left">boroughQueens</td>
+<td align="right">-1.007</td>
+<td align="right">0.356</td>
+<td align="right">-2.828</td>
+<td align="right">0.005</td>
+</tr>
+<tr class="odd">
+<td align="left">boroughStaten Island</td>
+<td align="right">2.902</td>
+<td align="right">0.547</td>
+<td align="right">5.304</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">genderMale</td>
+<td align="right">-0.221</td>
+<td align="right">0.209</td>
+<td align="right">-1.057</td>
+<td align="right">0.291</td>
+</tr>
+<tr class="odd">
+<td align="left">age20 - 29</td>
+<td align="right">2.625</td>
+<td align="right">0.362</td>
+<td align="right">7.258</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">age30 - 39</td>
+<td align="right">2.632</td>
+<td align="right">0.362</td>
+<td align="right">7.278</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">age40 - 49</td>
+<td align="right">3.357</td>
+<td align="right">0.362</td>
+<td align="right">9.284</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">age50 - 59</td>
+<td align="right">4.893</td>
+<td align="right">0.362</td>
+<td align="right">13.531</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">age60+</td>
+<td align="right">8.148</td>
+<td align="right">0.362</td>
+<td align="right">22.532</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">mid_income</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">-7.304</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">4.780</td>
+<td align="right">0.633</td>
+<td align="right">7.556</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">boroughBrooklyn</td>
+<td align="right">-1.083</td>
+<td align="right">0.607</td>
+<td align="right">-1.785</td>
+<td align="right">0.074</td>
+</tr>
+<tr class="odd">
+<td align="left">boroughManhattan</td>
+<td align="right">0.375</td>
+<td align="right">0.713</td>
+<td align="right">0.526</td>
+<td align="right">0.599</td>
+</tr>
+<tr class="even">
+<td align="left">boroughQueens</td>
+<td align="right">-1.080</td>
+<td align="right">0.559</td>
+<td align="right">-1.932</td>
+<td align="right">0.053</td>
+</tr>
+<tr class="odd">
+<td align="left">boroughStaten Island</td>
+<td align="right">2.283</td>
+<td align="right">0.859</td>
+<td align="right">2.660</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="even">
+<td align="left">genderMale</td>
+<td align="right">0.220</td>
+<td align="right">0.328</td>
+<td align="right">0.671</td>
+<td align="right">0.502</td>
+</tr>
+<tr class="odd">
+<td align="left">raceAsian/Pacific Islander</td>
+<td align="right">-0.183</td>
+<td align="right">0.518</td>
+<td align="right">-0.353</td>
+<td align="right">0.724</td>
+</tr>
+<tr class="even">
+<td align="left">raceBlack</td>
+<td align="right">0.430</td>
+<td align="right">0.518</td>
+<td align="right">0.830</td>
+<td align="right">0.407</td>
+</tr>
+<tr class="odd">
+<td align="left">raceLatino/Hispanic</td>
+<td align="right">1.281</td>
+<td align="right">0.518</td>
+<td align="right">2.473</td>
+<td align="right">0.013</td>
+</tr>
+<tr class="even">
+<td align="left">raceOther/Unknown</td>
+<td align="right">-2.153</td>
+<td align="right">0.518</td>
+<td align="right">-4.157</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_income</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">-3.616</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interpretation</strong>: HIV related death rate among male are lower than that among female, which is adverse to the effect of sex on HIV diagnoses. This result indicates that the restricted social autonomy of women and young girls can reduce their ability to access sexual health and HIV services. HIV related death rate in adults aged 20 or older are significantly higher than young people aged 13 to 19, and this rate increased as the increase of age. HIV related death rate in Latino/Hispanic population are significantly higher than that in white population, which may be explained by unequal access to HIV treatments. The effect of income is not significant.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
