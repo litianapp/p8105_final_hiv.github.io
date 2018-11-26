@@ -3,7 +3,6 @@ output_dir: "."
 navbar:
   title: "Report"
   right:
-
     - text: "Flexdashboard"
       href: geo_plotly.html
     - text: "Final data repo"
