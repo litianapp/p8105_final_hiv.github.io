@@ -53,6 +53,3 @@ http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_re
 *[This is the link](www.baidu.com)*
 
 
-## Flexdashboard
-
-*[This is the flexdashboard link](geo_plotly.html) *

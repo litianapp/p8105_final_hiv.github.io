@@ -3,6 +3,9 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
+
+    - text: "Flexdashboard"
+      href: geo_plotly.html
     - icon: fa-envelope fa-lg
       href: mailto:<tl2882@cumc.columbia.edu>
     - icon: fa-github fa-lg
