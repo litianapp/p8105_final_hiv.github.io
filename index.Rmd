@@ -1,0 +1,22 @@
+---
+title: "Final Project"
+author: "Tian Li/Huaqing Xi/Shuwei Liu/Yueming Kou/Yizhi Ma"
+---
+&nbsp;
+
+# Background and Objectives:
+Human immunodeficiency virus infection and acquired immune deficiency syndrome (HIV/AIDS) is a spectrum of conditions caused by infection with the human immunodeficiency virus (HIV).
+In this project, we aim to study the relationships between characteristics of patients and the HIV/AIDS Diagnoses Outcome in New York City from 2011 to 2015.
+
+Infection by human immunodeficiency virus (HIV) may lead to acquired immunodeficiency syndrome (AIDS) and continues to be a global public health problem, with an estimated 37 million individuals worldwide who are HIV-positive. The AIDS epidemic 
+
+&nbsp;
+
+### Link
+
+*[This is the link](www.baidu.com)*
+
+
+### Flexdashboard
+
+*[This is the flexdashboard link](plotly.html) *
