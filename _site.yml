@@ -8,6 +8,6 @@ navbar:
     - text: "Final data repo"
       href: https://github.com/tiffanyxi/p8105_final_hiv
     - text: "Final website repo"
-      href: https://github.com/tiffanyxi/p8105_final_hiv
+      href: https://github.com/litianapp/p8105_final_hiv.github.io
 output:
   html_document
