@@ -1,5 +1,5 @@
 ---
-title: "Final Project"
+title: "Data Analysis of HIV/AIDS diagnoses in NYC"
 author: "Tian Li/Huaqing Xi/Shuwei Liu/Yueming Kou/Yizhi Ma"
 ---
 &nbsp;
