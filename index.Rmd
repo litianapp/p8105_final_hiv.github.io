@@ -19,4 +19,4 @@ Infection by human immunodeficiency virus (HIV) may lead to acquired immunodefic
 
 ### Flexdashboard
 
-*[This is the flexdashboard link](plotly.html) *
+*[This is the flexdashboard link](geo_plotly.html) *

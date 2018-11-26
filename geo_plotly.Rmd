@@ -10,16 +10,12 @@ output:
 library(flexdashboard)
 library(tidyverse)
 library(plotly)
-library(p8105.datasets)
-
-data(rest_inspec)
-
 ```
 
-Column {data-width=650}
+Column {data-width=450}
 -----------------------------------------------------------------------
 
-### Number of restaurants of different scores
+### 
 ```{r scatterplots}
 rest_inspec %>%
   filter(!is.na(score)) %>% 
@@ -29,7 +25,7 @@ rest_inspec %>%
           alpha = 0.5)
 ```
 
-Column {data-width=350}
+Column {data-width=550}
 -----------------------------------------------------------------------
 
 ### Distribution of scores in different boroughs
