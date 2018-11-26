@@ -1,14 +1,16 @@
 name: "Yay internet!"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "Report"
   right:
 
     - text: "Flexdashboard"
       href: geo_plotly.html
     - icon: fa-envelope fa-lg
       href: mailto:<tl2882@cumc.columbia.edu>
-    - icon: fa-github fa-lg
+    - text: "Final data repo"
+      href: https://github.com/tiffanyxi/p8105_final_hiv
+    - icon: "Final website repo"
       href: https://github.com/tiffanyxi/p8105_final_hiv
 output:
   html_document
