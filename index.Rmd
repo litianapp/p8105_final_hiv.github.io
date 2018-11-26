@@ -1,6 +1,6 @@
 ---
-title: "Data Analysis of HIV/AIDS diagnoses in NYC"
-author: "Tian Li/Huaqing Xi/Shuwei Liu/Yueming Kou/Yizhi Ma"
+title: "Data Analysis of HIV/AIDS Diagnoses in NYC"
+author: "Tian Li / Huaqing Xi / Shuwei Liu / Yueming Kou / Yizhi Ma"
 ---
 &nbsp;
 
@@ -12,11 +12,47 @@ Infection by human immunodeficiency virus (HIV) may lead to acquired immunodefic
 
 &nbsp;
 
-### Link
+# Data Sources:
+
+## Main data
+
+HIV/AIDS Diagnoses by Neighborhood, Age Group, and Race/Ethnicity from NYC open data.
+https://data.cityofnewyork.us/Health/DOHMH-HIV-AIDS-Annual-Report/fju2-rdad
+
+**Data discription:**
+
+Data reported to the HIV Epidemiology and Field Services Program by June 30, 2016. All data shown are for people ages 13 and older. Borough-wide and citywide totals may include cases assigned to a borough with an unknown UHF or assigned to NYC with an unknown borough, respectively. Therefore, UHF totals may not sum to borough totals and borough totals may not sum to citywide totals."
+
+&nbsp;
+
+## Other data
+
+Shapefile of NYC Zip Codes - tabulation areas provided by NYC Department of Information Technology & Telecommunications (DOITT)
+http://data.beta.nyc/dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90
+
+Zip code of United Hospital Fund neighborhood
+https://www1.nyc.gov/assets/doh/downloads/pdf/data/appb.pdf
+
+Personal Income data
+Raw data comes from 2011-2015 American Community Survey (ACS) Public Use Microdata Sample (PUMS). 
+https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_pums_csv_2011_2015&prodType=document
+
+The raw dataset is super large with hundreds of variables, so we select it based on our target variables - location and total person income. The selected dataset is saved as “selected_pums.csv” in the data folder under our R project.
+The location data from 2011 ACS is based on Public use microdata area code (PUMA) 2000, while the definition for PUMA 2000 is nowhere to be found. This is why we exclude the income data from 2011.
+For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better visualization on the NYC map. The transform is based on the following two datasets.
+
+ZCTA10 to PUMA10
+http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls
+ZIP code to ZCTA10 
+http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls
+
+&nbsp;
+
+## Link
 
 *[This is the link](www.baidu.com)*
 
 
-### Flexdashboard
+## Flexdashboard
 
 *[This is the flexdashboard link](geo_plotly.html) *
