@@ -160,7 +160,7 @@ leaflet(map_data) %>%
   addProviderTiles("CartoDB.Positron") %>%
   addLegend(position = "bottomright", pal = pal1, values = ~sum_diagnoses,
             title = "The amount of HIV diagnoses", opacity = 0.8) %>% 
-  setView(-73.98, 40.75, zoom = 11)
+  setView(-73.88, 40.75, zoom = 11)
 ```
 
 Column {data-width=350}
@@ -179,7 +179,7 @@ leaflet(map_data) %>%
   addProviderTiles("CartoDB.Positron") %>%
   addLegend(position = "bottomright", pal = pal2, values = ~sum_diagnosis_rate,
             title = "The amount of HIV diagnosis rate", opacity = 0.8) %>% 
-  setView(-73.98, 40.75, zoom = 11)
+  setView(-73.88, 40.75, zoom = 11)
 ```
 
 Column {data-width=300}
@@ -196,7 +196,7 @@ leaflet(map_data_income) %>%
   addProviderTiles("CartoDB.Positron") %>%
   addLegend(position = "bottomright", pal = pal3, values = ~mean_income,
             title = "Mean income of each uhf", opacity = 0.8) %>% 
-  setView(-73.98, 40.75, zoom = 11)
+  setView(-73.88, 40.75, zoom = 11)
 ```
 
 
