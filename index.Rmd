@@ -1,16 +1,18 @@
 ---
 title: "Data Analysis of HIV/AIDS Diagnoses in NYC"
 author: "Tian Li / Huaqing Xi / Shuwei Liu / Yueming Kou / Yizhi Ma"
+output:
+  html_document: 
+    toc: true
+    toc_float: true
 ---
-&nbsp;
 
-# Background and Objectives:
+# Background and Objectives
 Infection by human immunodeficiency virus (HIV) may lead to acquired immunodeficiency syndrome (AIDS) and continues to be a global public health problem, with an estimated 37 million individuals worldwide who are HIV-positive. New York City has the oldest and largest HIV epidemic in the United States history, and it also so leads the nation in the number of new HIV cases nowadays.
 In this project, we aim to study the relationships between different characteristics of patients and the HIV/AIDS Diagnosis Outcome in New York City from 2011 to 2015.
 
-&nbsp;
 
-# Data Sources:
+# Data Sources
 
 ## Main data
 
@@ -46,7 +48,7 @@ http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_re
 
 &nbsp;
 
-## Link
+# Link
 
 *[This is the link](www.baidu.com)*
 
