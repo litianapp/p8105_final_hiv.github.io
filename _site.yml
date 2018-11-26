@@ -3,11 +3,8 @@ output_dir: "."
 navbar:
   title: "Report"
   right:
-
     - text: "Flexdashboard"
       href: geo_plotly.html
-    - icon: fa-envelope fa-lg
-      href: mailto:<tl2882@cumc.columbia.edu>
     - text: "Final data repo"
       href: https://github.com/tiffanyxi/p8105_final_hiv
     - icon: "Final website repo"
