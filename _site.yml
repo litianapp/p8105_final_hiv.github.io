@@ -3,7 +3,7 @@ output_dir: "."
 navbar:
   title: "Report"
   right:
-    - text: "Flexdashboard"
+    - text: "Geomap"
       href: geo_plotly.html
     - text: "Final data repo"
       href: https://github.com/tiffanyxi/p8105_final_hiv
