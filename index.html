@@ -308,7 +308,8 @@ div.tocify {
 
 <div id="background-and-objectives" class="section level1">
 <h1>Background and Objectives</h1>
-<p>Infection by human immunodeficiency virus (HIV) may lead to acquired immunodeficiency syndrome (AIDS) and continues to be a global public health problem, with an estimated 37 million individuals worldwide who are HIV-positive. New York City has the oldest and largest HIV epidemic in the United States history, and it also so leads the nation in the number of new HIV cases nowadays. In this project, we aim to study the relationships between different characteristics of patients and the HIV/AIDS Diagnosis Outcome in New York City from 2011 to 2015.</p>
+<p>Infection by human immunodeficiency virus (HIV) may lead to acquired immunodeficiency syndrome (AIDS) and continues to be a global public health problem, with an estimated 37 million individuals worldwide who are HIV-positive. New York City has the oldest and largest HIV epidemic in the United States history, and it also so leads the nation in the number of new HIV cases nowadays.<br />
+In this project, we aim to study the relationships between different characteristics of patients and the HIV/AIDS Diagnosis Outcome in New York City from 2011 to 2015.</p>
 </div>
 <div id="data-sources" class="section level1">
 <h1>Data Sources</h1>
@@ -321,11 +322,19 @@ div.tocify {
 </div>
 <div id="other-data" class="section level2">
 <h2>Other data</h2>
-<p>Shapefile of NYC Zip Codes - tabulation areas provided by NYC Department of Information Technology &amp; Telecommunications (DOITT) <a href="http://data.beta.nyc/dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90" class="uri">http://data.beta.nyc/dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90</a></p>
-<p>Zip code of United Hospital Fund neighborhood <a href="https://www1.nyc.gov/assets/doh/downloads/pdf/data/appb.pdf" class="uri">https://www1.nyc.gov/assets/doh/downloads/pdf/data/appb.pdf</a></p>
-<p>Personal Income data Raw data comes from 2011-2015 American Community Survey (ACS) Public Use Microdata Sample (PUMS). <a href="https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_pums_csv_2011_2015&amp;prodType=document" class="uri">https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_pums_csv_2011_2015&amp;prodType=document</a></p>
-<p>The raw dataset is super large with hundreds of variables, so we select it based on our target variables - location and total person income. The selected dataset is saved as “selected_pums.csv” in the data folder under our R project. The location data from 2011 ACS is based on Public use microdata area code (PUMA) 2000, while the definition for PUMA 2000 is nowhere to be found. This is why we exclude the income data from 2011. For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better visualization on the NYC map. The transform is based on the following two datasets.</p>
-<p>ZCTA10 to PUMA10 <a href="http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls" class="uri">http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls</a> ZIP code to ZCTA10 <a href="http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls" class="uri">http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls</a></p>
+<p>Shapefile of NYC Zip Codes - tabulation areas provided by NYC Department of Information Technology &amp; Telecommunications (DOITT)<br />
+<a href="http://data.beta.nyc/dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90" class="uri">http://data.beta.nyc/dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90</a></p>
+<p>Zip code of United Hospital Fund neighborhood<br />
+<a href="https://www1.nyc.gov/assets/doh/downloads/pdf/data/appb.pdf" class="uri">https://www1.nyc.gov/assets/doh/downloads/pdf/data/appb.pdf</a></p>
+<p>Personal Income data<br />
+Raw data comes from 2011-2015 American Community Survey (ACS) Public Use Microdata Sample (PUMS).<br />
+<a href="https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_pums_csv_2011_2015&amp;prodType=document" class="uri">https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_pums_csv_2011_2015&amp;prodType=document</a></p>
+<p>The raw dataset is super large with hundreds of variables, so we select it based on our target variables - location and total person income. The selected dataset is saved as “selected_pums.csv” in the data folder under our R project. The location data from 2011 ACS is based on Public use microdata area code (PUMA) 2000, while the definition for PUMA 2000 is nowhere to be found. This is why we exclude the income data from 2011.<br />
+For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better visualization on the NYC map. The transform is based on the following two datasets.</p>
+<p>ZCTA10 to PUMA10<br />
+<a href="http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls" class="uri">http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls</a><br />
+ZIP code to ZCTA10<br />
+<a href="http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls" class="uri">http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls</a></p>
 <p> </p>
 </div>
 </div>
