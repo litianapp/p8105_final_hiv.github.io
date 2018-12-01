@@ -14,7 +14,7 @@ In this project, we aim to study the relationships between different characteris
 
 # Data Sources
 
-## Main data
+### Main data
 
 HIV/AIDS Diagnoses by Neighborhood, Age Group, and Race/Ethnicity from NYC open data. [[website](https://data.cityofnewyork.us/Health/DOHMH-HIV-AIDS-Annual-Report/fju2-rdad)]
 
@@ -24,7 +24,7 @@ Data reported to the HIV Epidemiology and Field Services Program by June 30, 201
 
 
 
-## Other data
+### Other data
 
 
 * Shapefile of NYC Zip Codes - tabulation areas provided by NYC Department of Information Technology & Telecommunications (DOITT) [[website](http://data.beta.nyc/dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90)]
@@ -43,6 +43,10 @@ For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better
 * [ZCTA10 to PUMA10](http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls)
 * [ZIP Code to ZCTA10](http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls)
 
+# Results
+
+
+# Conclusion
 
 
 # Email
