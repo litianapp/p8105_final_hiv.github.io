@@ -20,4 +20,5 @@ navbar:
       icon: fa-file-text
       href: https://github.com/litianapp/p8105_final_hiv.github.io
 output:
-  html_document
+  html_document:
+    theme: flatly
