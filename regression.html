@@ -586,7 +586,14 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
-<p><strong>Interpretation</strong>: HIV related death rate among male are lower than that among female, which is adverse to the effect of sex on HIV diagnoses. This result indicates that the restricted social autonomy of women and young girls can reduce their ability to access sexual health and HIV services. HIV related death rate in adults aged 20 or older are significantly higher than young people aged 13 to 19, and this rate increased as the increase of age. HIV related death rate in Latino/Hispanic population are significantly higher than that in white population, which may be explained by unequal access to HIV treatments. The effect of income is not significant.</p>
+<p><strong>Interpretation</strong>: HIV related death rate among male are lower than that among female, which is adverse to the effect of gender on HIV diagnoses. This result indicates that the restricted social autonomy of women and young girls can reduce their ability to access sexual health and HIV services. HIV related death rate in adults aged 20 or older are significantly higher than young people aged 13 to 19, and this rate increased as the increase of age. HIV related death rate in Latino/Hispanic population are significantly higher than that in white population, which may be explained by unequal access to HIV treatments. The effect of income is not significant.</p>
+</div>
+<div id="results" class="section level3">
+<h3>Results</h3>
+<p><strong>Model 1</strong>: <em>HIV_diagnoses</em> = 0.983 + 0.297<em>I(borough = Brooklyn)</em> + 3.091<em>I(borough = Manhattan)</em> - 1.245<em>I(borough = Queens)</em> - 4.376<em>I(borough = Staten Island)</em> + 6.083<em>I(male)</em> + 9.600<em>I(age20-29)</em> + 6.870<em>I(age30-39)</em> + 4.627<em>I(age40-49)</em> + 2.355<em>I(age50-59)</em> + 0.427<em>I(age60+)</em></p>
+<p><strong>Model 2</strong>: <em>HIV_diagnoses</em> = 5.143 + 0.357<em>I(borough = Brooklyn)</em> + 3.710<em>I(borough = Manhattan)</em> - 1.494<em>I(borough = Queens)</em> - 5.251<em>I(borough = Staten Island)</em> + 7.299<em>I(male)</em> - 3.628<em>I(Asian/Pacific Islander)</em> + 7.304<em>I(Black)</em> + 5.399<em>I(Latino/Hispanic)</em> - 5.008<em>I(Other/Unknown)</em></p>
+<p><strong>Model 3</strong>: <em>HIV_related_death_rate</em> = 2.249 + 0.100<em>I(borough = Brooklyn)</em> + 0.118<em>I(borough = Manhattan)</em> - 1.007<em>I(borough = Queens)</em> + 2.902<em>I(borough = Staten Island)</em> - 0.221<em>I(male)</em> + 2.625<em>I(age20-29)</em> + 2.632<em>I(age30-39)</em> + 3.357<em>I(age40-49)</em> + 4.893<em>I(age50-59)</em> + 8.148<em>I(age60+)</em></p>
+<p><strong>Model 4</strong>: <em>HIV_related_death_rate</em> = 4.780 - 1.083<em>I(borough = Brooklyn)</em> + 0.375<em>I(borough = Manhattan)</em> - 1.080<em>I(borough = Queens)</em> + 2.283<em>I(borough = Staten Island)</em> + 0.220<em>I(male)</em> - 0.183<em>I(Asian/Pacific Islander)</em> + 0.430<em>I(Black)</em> + 1.281<em>I(Latino/Hispanic)</em> - 2.153<em>I(Other/Unknown)</em></p>
 </div>
 
 
