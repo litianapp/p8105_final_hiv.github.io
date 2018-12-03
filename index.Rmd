@@ -49,16 +49,33 @@ For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better
 
 Model1:
 
+*HIV_diagnoses* = 0.983 + 0.297*I(borough = Brooklyn)* + 3.091*I(borough = Manhattan)* - 1.245*I(borough = Queens)* - 4.376*I(borough = Staten Island)* + 6.083*I(male)* + 9.600*I(age20-29)* + 6.870*I(age30-39)* + 4.627*I(age40-49)* + 2.355*I(age50-59)* + 0.427*I(age60+)*
+
 Model2:
+
+*HIV_diagnoses* = 5.143 + 0.357*I(borough = Brooklyn)* + 3.710*I(borough = Manhattan)* - 1.494*I(borough = Queens)* - 5.251*I(borough = Staten Island)* + 7.299*I(male)* - 3.628*I(Asian/Pacific Islander)* + 7.304*I(Black)* + 5.399*I(Latino/Hispanic)* - 5.008*I(Other/Unknown)* 
 
 **Outcome2: Death rate related to HIV**
 
-Model1:
+Model3:
 
-Model2:
+*HIV_related_death_rate* = 2.249 + 0.100*I(borough = Brooklyn)* + 0.118*I(borough = Manhattan)* - 1.007*I(borough = Queens)* + 2.902*I(borough = Staten Island)* - 0.221*I(male)* + 2.625*I(age20-29)* + 2.632*I(age30-39)* + 3.357*I(age40-49)* + 4.893*I(age50-59)* + 8.148*I(age60+)*
+
+Model4:
+
+*HIV_related_death_rate* = 4.780 - 1.083*I(borough = Brooklyn)* + 0.375*I(borough = Manhattan)* - 1.080*I(borough = Queens)* + 2.283*I(borough = Staten Island)* + 0.220*I(male)* - 0.183*I(Asian/Pacific Islander)* + 0.430*I(Black)* + 1.281*I(Latino/Hispanic)* - 2.153*I(Other/Unknown)* 
 
 # Conclusion
 
+1. Overall, female has a lower possibility to be daiagnosed as HIV and a higher possibility of death due to HIV infection than any another groups.
+
+2. Most infection of HIV occured between 20 and 29 years old.
+
+3. The rates of new HIV infection among black people and Latino/Hispanic are higher than other race groups.
+
+4. The total HIV incidences in NYC declined from 2011 to 2015.
+
+5. Income is not accociated with HIV diagnosis.
 
 # Email
 
