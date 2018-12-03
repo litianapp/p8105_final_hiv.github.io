@@ -45,6 +45,17 @@ For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better
 
 # Results
 
+**Outcome1: The number of HIV diagnosis**
+
+Model1:
+
+Model2:
+
+**Outcome2: Death rate related to HIV**
+
+Model1:
+
+Model2:
 
 # Conclusion
 
