@@ -77,6 +77,10 @@ Model4:
 
 5. The impact of income on both the number of HIV diagnosis and death rate related to HIV is not significant.
 
+# Screencast
+
+Screencast of our project can be found [here](www.youtube.com).
+
 # Email
 
 Mail to: _[Tian Li](mailto:tl2882@cumc.columbia.edu) / [Shuwei Liu](mailto:sl4471@cumc.columbia.edu) / [Huaqing Xi](mailto:hx2263@cumc.columbia.edu) / [Yueming Kou](mailto:yk2826@cumc.columbia.edu) / [Yizhi Ma](mailto:ym2715@cumc.columbia.edu)_
