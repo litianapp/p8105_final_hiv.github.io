@@ -2,12 +2,25 @@ name: "Yay internet!"
 output_dir: "."
 navbar:
   title: "Home"
+  left:
+    - text: "Plot"
+      icon: fa-bar-chart
+      href: visual.html
+    - text: "Regression"
+      icon: fa-line-chart
+      href: regression.html
   right:
     - text: "Geomap"
+      icon: fa-map-o
       href: geo_plotly.html
     - text: "Final data repo"
+      icon: fa-file-code-o
       href: https://github.com/tiffanyxi/p8105_final_hiv
     - text: "Final website repo"
+      icon: fa-file-text
       href: https://github.com/litianapp/p8105_final_hiv.github.io
 output:
-  html_document
+  html_document:
+    theme: flatly
+    highlight: textmate
+    css: styles.css

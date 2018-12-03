@@ -1,55 +1,67 @@
 ---
 title: "Data Analysis of HIV/AIDS Diagnoses in NYC"
-author: "Tian Li / Huaqing Xi / Shuwei Liu / Yueming Kou / Yizhi Ma"
+author: "Tian Li(tl2882) / Huaqing Xi(hx2263) / Shuwei Liu(sl4471) / Yueming Kou(yk2826) / Yizhi Ma(ym2715)"
 output:
   html_document: 
     toc: true
     toc_float: true
 ---
-
-# Background and Objectives
+  
+# Background and Objectives  
 Infection by human immunodeficiency virus (HIV) may lead to acquired immunodeficiency syndrome (AIDS) and continues to be a global public health problem, with an estimated 37 million individuals worldwide who are HIV-positive. New York City has the oldest and largest HIV epidemic in the United States history, and it also so leads the nation in the number of new HIV cases nowadays.  
+  
 In this project, we aim to study the relationships between different characteristics of patients and the HIV/AIDS Diagnosis Outcome in New York City from 2011 to 2015.
-
 
 # Data Sources
 
-## Main data
+### Main data
 
-HIV/AIDS Diagnoses by Neighborhood, Age Group, and Race/Ethnicity from NYC open data.
-https://data.cityofnewyork.us/Health/DOHMH-HIV-AIDS-Annual-Report/fju2-rdad
+HIV/AIDS Diagnoses by Neighborhood, Age Group, and Race/Ethnicity from NYC open data. [[website](https://data.cityofnewyork.us/Health/DOHMH-HIV-AIDS-Annual-Report/fju2-rdad)]
 
 **Data discription:**
 
 Data reported to the HIV Epidemiology and Field Services Program by June 30, 2016. All data shown are for people ages 13 and older. Borough-wide and citywide totals may include cases assigned to a borough with an unknown UHF or assigned to NYC with an unknown borough, respectively. Therefore, UHF totals may not sum to borough totals and borough totals may not sum to citywide totals."
 
-&nbsp;
 
-## Other data
 
-Shapefile of NYC Zip Codes - tabulation areas provided by NYC Department of Information Technology & Telecommunications (DOITT)  
-http://data.beta.nyc/dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90
+### Other data
 
-Zip code of United Hospital Fund neighborhood  
-https://www1.nyc.gov/assets/doh/downloads/pdf/data/appb.pdf
 
-Personal Income data  
-Raw data comes from 2011-2015 American Community Survey (ACS) Public Use Microdata Sample (PUMS).   
-https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_pums_csv_2011_2015&prodType=document
+* Shapefile of NYC Zip Codes - tabulation areas provided by NYC Department of Information Technology & Telecommunications (DOITT) [[website](http://data.beta.nyc/dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90)]
 
-The raw dataset is super large with hundreds of variables, so we select it based on our target variables - location and total person income. The selected dataset is saved as “selected_pums.csv” in the data folder under our R project.
-The location data from 2011 ACS is based on Public use microdata area code (PUMA) 2000, while the definition for PUMA 2000 is nowhere to be found. This is why we exclude the income data from 2011.  
+* Zip code of United Hospital Fund neighborhood [[website](https://www1.nyc.gov/assets/doh/downloads/pdf/data/appb.pdf)]
+
+* 2011-2015 American Community Survey (ACS) Public Use Microdata Sample (PUMS). [[website](https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_pums_csv_2011_2015&prodType=document)]
+
+**PUMS data wrangling:**
+
+The raw dataset is super large with hundreds of variables, so we select it based on our target variables - location and total person income. The selected dataset is saved as “[selected_pums.csv](./data/selected_pums.csv)” in the data folder under our R project.
+The location data from 2011 ACS is based on Public Use Microdata Area Code (PUMA) 2000, while the definition for PUMA 2000 is nowhere to be found. This is why we exclude the income data from 2011.  
+  
 For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better visualization on the NYC map. The transform is based on the following two datasets.
 
-ZCTA10 to PUMA10  
-http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls  
-ZIP code to ZCTA10   
-http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls
+* [ZCTA10 to PUMA10](http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls)
+* [ZIP Code to ZCTA10](http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls)
 
-&nbsp;
+# Results
 
-# Link
+**Outcome1: The number of HIV diagnosis**
 
-*[This is the link](www.baidu.com)*
+Model1:
+
+Model2:
+
+**Outcome2: Death rate related to HIV**
+
+Model1:
+
+Model2:
+
+# Conclusion
+
+
+# Email
+
+Mail to: _[Tian Li](mailto:tl2882@cumc.columbia.edu) / [Shuwei Liu](mailto:sl4471@cumc.columbia.edu) / [Huaqing Xi](mailto:hx2263@cumc.columbia.edu) / [Yueming Kou](mailto:yk2826@cumc.columbia.edu) / [Yizhi Ma](mailto:ym2715@cumc.columbia.edu)_
 
 

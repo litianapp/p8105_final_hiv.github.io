@@ -1,0 +1,238 @@
+---
+title: "Visualization"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+library(rvest)
+library(httr)
+library(tigris)
+library(dplyr)
+library(leaflet)
+library(sp)
+library(ggmap)
+library(maptools)
+library(broom)
+library(httr)
+library(rgdal)
+theme_set(theme_bw() + theme(legend.position = "bottom") + theme(plot.title = element_text(hjust = 0.5)))
+```
+
+```{r import_data, message=FALSE, echo = FALSE}
+UHF_zipcode = 
+  read_csv("./data/appb.csv") %>% 
+  slice(-43) %>% 
+  select(-Borough) %>% 
+  rename("UHF" = "UHF Neighborhood") %>% 
+  janitor::clean_names()
+```
+
+```{r combine_data, warning=FALSE, message=FALSE, echo = FALSE}
+raw_hiv = 
+  GET("https://data.cityofnewyork.us/api/views/fju2-rdad/rows.csv") %>% 
+  content("parsed") %>% 
+  janitor::clean_names()
+
+combine_hiv = 
+  right_join(UHF_zipcode, raw_hiv, by = "uhf") %>%
+  janitor::clean_names() %>% 
+  separate(zip_code, into = c("zipcode1", "zipcode2", "zipcode3", 
+                              "zipcode4", "zipcode5", "zipcode6", "zipcode7", "zipcode8",
+                              "zipcode9"), sep = ", ") %>% 
+  gather(key = zip_code, value = zipcode_value, zipcode1:zipcode9) %>% 
+  filter(!is.na(zipcode_value)) %>% 
+  rename("zipcode" = "zipcode_value") %>% 
+  select(zipcode, everything(), -zip_code)
+```
+
+```{r pin_data, message=FALSE, echo = FALSE}
+r = GET('http://data.beta.nyc//dataset/3bf5fb73-edb5-4b05-bb29-7c95f4a727fc/resource/6df127b1-6d04-4bb7-b983-07402a2c3f90/download/f4129d9aa6dd4281bc98d0f701629b76nyczipcodetabulationareas.geojson')
+nyc_zipcode = readOGR(content(r,'text'), 'OGRGeoJSON', verbose = F)
+
+zipcode_lat_lng = nyc_zipcode@data %>% 
+  select(zipcode = postalCode, longitude, latitude) %>% 
+  mutate(zipcode = as.character(zipcode))
+  
+combine_hiv1 = 
+  full_join(zipcode_lat_lng, combine_hiv, by = "zipcode") %>% 
+  mutate(longitude = as.numeric(longitude), latitude = as.numeric(latitude)) %>% 
+  group_by(uhf) %>% 
+  summarise(lng = mean(longitude),
+            lat = mean(latitude)) %>% 
+  filter(!(uhf == "Pelhem - Throgs Neck"))
+```
+
+```{r load_income_data, warning=FALSE, message=FALSE, echo = FALSE}
+pums_raw = read_csv("./data/selected_pums.csv")
+
+temp = tempfile(fileext = ".xls")
+
+dataURL = "http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls"
+
+download.file(dataURL, destfile = temp, mode = 'wb')
+
+zcta_to_puma = readxl::read_xls(temp, sheet = 2) %>% 
+  select(zcta = zcta10, puma = puma10) %>% 
+  mutate(puma = as.numeric(puma))
+
+dataURL = "http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls"
+
+download.file(dataURL, destfile = temp, mode = 'wb')
+zip_to_zcta = readxl::read_xls(temp, sheet = 2) %>% 
+  select(zipcode, zcta = zcta5) 
+```
+
+```{r income_data_wrangling, echo = FALSE}
+pums_data = 
+  pums_raw %>% 
+  select(puma = PUMA10, income = PINCP, year = ADJINC) %>% 
+  filter(puma != -9)  # remove data from 2011 due to lack of area information
+
+pums_data$year = recode(pums_data$year, 
+                        "1042852" = "2012",
+                        "1025215" = "2013",  
+                        "1009585" = "2014", 
+                        "1001264" = "2015")   
+
+pums_data = 
+  pums_data %>% 
+  group_by(year, puma) %>% 
+  summarise(mid_income = median(income, na.rm = TRUE)) %>% 
+  ungroup()         # calculate yearly median income for each area
+```
+
+```{r zipcode match, echo = FALSE}
+puma_to_zipcode = right_join(zip_to_zcta, zcta_to_puma, by = "zcta") %>%   # generaate a puma to zipcode file
+  select(puma, zipcode)
+
+income_zipcode = right_join(pums_data, puma_to_zipcode, by = "puma") %>%  # matching zipcode with median income data
+  select(year, zipcode, mid_income) %>% 
+  mutate(year = as.numeric(year))
+
+combine_hiv_income = 
+  left_join(combine_hiv, income_zipcode, by = c("year", "zipcode"))
+
+hiv_data = raw_hiv
+```
+
+
+### Gender, Neighborhood vs HIV
+
+```{r fig.width = 8, fig.height = 6, echo = FALSE}
+neb_plot = hiv_data %>% 
+  group_by(uhf, gender) %>% 
+  filter(year != "ALL", borough != "All", uhf != "All", gender != "All") %>% 
+  filter(age != "All") %>%
+  summarise(sum_hiv = sum(hiv_diagnoses)) %>% 
+  ggplot(aes(x = reorder(uhf, sum_hiv), y = sum_hiv, color = gender)) + 
+  coord_flip() +
+  geom_point() +
+  labs(
+        title = "Gender and Neighborhood Influence on HIV Incidence",
+        x = "Neighborhood",
+        y = "HIV diagnoses",
+        caption = "Data from the ..."
+      )
+
+ggplotly(neb_plot)
+```
+
+The number of HIV diagnoses is apperently higher among male subgroups than female in all neighborhoods. Beford Stuyvesant - Crown Heights have the highest total HIV diagnoses and highest female HIV diagnoses cases. Chelsea - Clinton ranks first in male HIV diagnoses. Bayside - Little Neck has lowest number of HIV diagnoses for both male and female.
+
+### Gender, age vs HIV
+
+* Omit the data of transgender group, because the data of transgender were not divided into specific age groups.
+```{r fig.width = 8, fig.height = 6, echo = FALSE}
+age_plot = hiv_data %>% 
+  filter(race == "All" & borough == "All" & age != "All") %>% 
+  group_by(gender, age) %>% 
+  summarise(sum_hiv = sum(hiv_diagnoses)) %>% 
+  ggplot(aes(y = sum_hiv, x = age, fill = gender)) + 
+  geom_bar(stat = "identity", alpha = 0.8, position = position_dodge()) +
+  scale_fill_brewer(palette = "Dark2") +
+  labs(
+        title = "Gender and Age Influence on HIV Incidence",
+        x = "Age range",
+        y = "HIV diagnoses",
+        caption = "Data from the ..."
+      ) 
+
+ggplotly(age_plot)
+
+```
+
+As is shown in the barchart above, in every age range, HIV incidence rate in male is significantly higher than that in female population. The potential explaination could be the gender differences with respect to HIV/AIDS depend on patterns of disease transmission. Most infections occurred in adults aged 20 to 29 years, and the incidence porpotion declines as the increase of age.
+
+
+### Gender, race vs HIV/mortality
+
+```{r fig.width = 8, fig.height = 6, echo = FALSE}
+race_plot = hiv_data %>% 
+  filter(age == "All" & borough == "All" & race != "All") %>% 
+  group_by(gender, race) %>% 
+  summarise(sum_hiv = sum(hiv_diagnoses)) %>% 
+  ggplot(aes(y = sum_hiv, x = reorder(race, sum_hiv), fill = gender)) + 
+  geom_bar(stat = "identity", alpha = 0.8, position = position_dodge()) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9")) +
+  labs(
+        title = "Race and Gender Influence on HIV Incidence",
+        x = "Race",
+        y = "HIV diagnoses",
+        caption = "Data from the ..."
+      ) 
+
+ggplotly(race_plot)
+
+
+```
+
+By race/ethnicity, black men/women have the highest rates of new HIV infections among all men/women. Whereas the incidence rate among Asian/Pacific Islander is the lowest given the study population in NYC. This is because some race population groups have higher rates of HIV in their communities, thus raising the risk of new infections with each sexual or drug use encounter. Plus, social, economic, and demographic factors of various race group—such as stigma, discrimination, income, education, and geographic region—could also affect their risk for HIV. 
+
+```{r HIV-related-death_rate, fig.width = 8, fig.height = 6, echo = FALSE}
+race_plot = hiv_data %>% 
+  filter(age == "All" & borough == "All" & race != "All" & hiv_related_death_rate!= 99999) %>% 
+  group_by(gender, race) %>% 
+  summarise(sum_hiv = sum(hiv_related_death_rate)) %>% 
+  ggplot(aes(y = sum_hiv, x = reorder(race, sum_hiv), fill = gender)) + 
+  geom_bar(stat = "identity", alpha = 0.8, position = position_dodge()) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9")) +
+  labs(
+        title = "Race and Gender Influence on HIV-related-death_rate",
+        x = "Race",
+        y = "HIV diagnoses",
+        caption = "Data from the ..."
+      ) 
+
+ggplotly(race_plot)
+```
+
+However, if we compare the plot of HIV Incidence with the plot of HIV related death rate, we will notice that although the HIV incidence in male is much higher than female, the HIV related death rate in women is higher than that of men in some race, like White and Latino/Hispanic. We can draw the conclusion that women infected with HIV disease are more vulnerable than men with HIV disease. Other possible explaination could be male are more likely to get access to the HIV treatment than women, reflecting the gender inequality of social status.
+
+
+### HIV diagnoses in borough with most HIV over years
+
+
+```{r overall_year, echo = FALSE, fig.width = 8, fig.height = 6}
+overall_year = hiv_data %>%
+  filter(borough == "All", uhf == "All", age == "All", race == "All") %>% 
+  group_by(year, gender) %>% 
+  summarize(sum_hiv = sum(hiv_diagnoses)) %>% 
+  ggplot(aes(x = year, y = sum_hiv, group = gender, color = gender)) +
+  geom_line() +
+  labs(
+        title = "Yearly change trend on HIV Incidence",
+        x = "Year",
+        y = "Sum of HIV diagnoses",
+        caption = "Data from the ..."
+      ) 
+ggplotly(overall_year)
+```
+
+
+The overall trend of total HIV incidence among study population in NYC on the decline from 2011 to 2015. The decrease in male is much significant than in female, and not very obvious in transgender group for their low base account. The downward trend in HIV incidence rate reflects the improvment of public health practice affect the HIV incidence rate through repeated exposure to counseling (such as the promotion of condom use or safe sex or other prevention messages) and the advances in HIV treatments.
+
+
+
+

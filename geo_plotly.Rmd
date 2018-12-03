@@ -5,6 +5,12 @@ output:
     orientation: columns
     vertical_layout: fill
 ---
+<style>                     
+.navbar {
+  background-color:#2C3E50;
+  border-color:white;
+}
+</style>     
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
