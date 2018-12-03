@@ -75,7 +75,7 @@ Model4:
 
 4. The total HIV incidences in NYC declined from 2011 to 2015.
 
-5. Income is not accociated with HIV diagnosis.
+5. The impact of income on both the number of HIV diagnosis and death rate related to HIV is not significant.
 
 # Email
 
