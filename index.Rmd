@@ -93,7 +93,9 @@ Model4:
 
 # Screencast
 
-Screencast of our project can be found [here](www.youtube.com).
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=LZtj8-rg8s0&feature=youtu.be" frameborder="0" allowfullscreen></iframe>
+
+Screencast of our project can be found [here](https://www.youtube.com/watch?v=LZtj8-rg8s0&feature=youtu.be).
 
 # Email
 
