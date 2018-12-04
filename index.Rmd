@@ -43,6 +43,11 @@ For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better
 * [ZCTA10 to PUMA10](http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/nyc_zcta10_to_puma10.xls)
 * [ZIP Code to ZCTA10](http://faculty.baruch.cuny.edu/geoportal/resources/nyc_geog/zip_to_zcta10_nyc_revised.xls)
 
+# Method
+
+After archiving our main data “HIV/AIDS Diagnoses by Neighborhood, Age Group, and Race/Ethnicity” from NYC open data, we tidied it using R. Multiple linear regression models are fitted around two outcomes:  The number of HIV diagnosis and Death rate related to HIV. Three Geomaps were created to show the geographical distribution and differences of HIV diagnosis, HIV rate and income between each United Hospital Funded Neighborhood.
+
+
 # Results
 
 * ### [Visulizations](visual.html)
