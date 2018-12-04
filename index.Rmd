@@ -45,6 +45,12 @@ For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better
 
 # Results
 
+* ### [Visulizations](visual.html)
+
+
+* ### [Multiple Linear Regression Models](regression.html)
+
+
 **Outcome1: The number of HIV diagnosis**
 
 Model1:
@@ -65,11 +71,14 @@ Model4:
 
 *HIV_related_death_rate* = 4.780 - 1.083*I(borough = Brooklyn)* + 0.375*I(borough = Manhattan)* - 1.080*I(borough = Queens)* + 2.283*I(borough = Staten Island)* + 0.220*I(male)* - 0.183*I(Asian/Pacific Islander)* + 0.430*I(Black)* + 1.281*I(Latino/Hispanic)* - 2.153*I(Other/Unknown)* 
 
+* ### [Geomaps](geo_plotly.html)
+
+
 # Conclusion
 
-1. Overall, female has a lower possibility to be daiagnosed as HIV and a higher possibility of death due to HIV infection than any another groups.
+1. Overall, female has a lower possibility to be diagnosed as HIV and a higher possibility of death due to HIV infection than any another groups.
 
-2. Most infection of HIV occured between 20 and 29 years old.
+2. Most infection of HIV occurred between 20 and 29 years old.
 
 3. The rates of new HIV infection among black people and Latino/Hispanic are higher than other race groups.
 
