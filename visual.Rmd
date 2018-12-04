@@ -139,7 +139,7 @@ neb_plot = hiv_data %>%
 ggplotly(neb_plot)
 ```
 
-The number of HIV diagnoses is apperently higher among male subgroups than female in all neighborhoods. Beford Stuyvesant - Crown Heights have the highest total HIV diagnoses and highest female HIV diagnoses cases. Chelsea - Clinton ranks first in male HIV diagnoses. Bayside - Little Neck has lowest number of HIV diagnoses for both male and female.
+The number of HIV diagnoses is apparently higher among male subgroups than female in all neighborhoods. Beford Stuyvesant - Crown Heights have the highest total HIV diagnoses and highest female HIV diagnoses cases. Chelsea - Clinton ranks first in male HIV diagnoses. Bayside - Little Neck has lowest number of HIV diagnoses for both male and female.
 
 ### Gender, age vs HIV
 
@@ -163,7 +163,7 @@ ggplotly(age_plot)
 
 ```
 
-As is shown in the barchart above, in every age range, HIV incidence rate in male is significantly higher than that in female population. The potential explaination could be the gender differences with respect to HIV/AIDS depend on patterns of disease transmission. Most infections occurred in adults aged 20 to 29 years, and the incidence porpotion declines as the increase of age.
+As is shown in the barchart above, in every age range, HIV incidence rate in male is significantly higher than that in female population. The potential explanation could be the gender differences with respect to HIV/AIDS depend on patterns of disease transmission. For example, men who have sex with men (MSM) takes up a large porpotion in existing HIV cases because unprotected anal intercourse are more likely to transmit HIV. Most infections occurred in adults aged 20 to 29 years, and the incidence porpotion declines as the increase of age.
 
 
 ### Gender, race vs HIV/mortality
@@ -208,7 +208,7 @@ race_plot = hiv_data %>%
 ggplotly(race_plot)
 ```
 
-However, if we compare the plot of HIV Incidence with the plot of HIV related death rate, we will notice that although the HIV incidence in male is much higher than female, the HIV related death rate in women is higher than that of men in some race, like White and Latino/Hispanic. We can draw the conclusion that women infected with HIV disease are more vulnerable than men with HIV disease. Other possible explaination could be male are more likely to get access to the HIV treatment than women, reflecting the gender inequality of social status.
+However, if we compare the plot of HIV Incidence with the plot of HIV related death rate, we will notice that although the HIV incidence in male is much higher than female, the HIV related death rate in women is higher than that of men in some race, like White and Latino/Hispanic. We can draw the conclusion that women infected with HIV disease are more vulnerable than men with HIV disease. Other possible explanation could be male are more likely to get access to the HIV treatment than women, reflecting the gender inequality of social status.
 
 
 ### HIV diagnoses in borough with most HIV over years
@@ -231,7 +231,7 @@ ggplotly(overall_year)
 ```
 
 
-The overall trend of total HIV incidence among study population in NYC on the decline from 2011 to 2015. The decrease in male is much significant than in female, and not very obvious in transgender group for their low base account. The downward trend in HIV incidence rate reflects the improvment of public health practice affect the HIV incidence rate through repeated exposure to counseling (such as the promotion of condom use or safe sex or other prevention messages) and the advances in HIV treatments.
+The overall trend of total HIV incidence among study population in NYC is on the decline from 2011 to 2015. The decrease in male is much significant than in female, and not very obvious in transgender group for their low base account. The downward trend in HIV incidence rate reflects the improvement of public health practice affect the HIV incidence rate through repeated exposure to counseling (such as the promotion of condom use or safe sex or other prevention messages) and the advances in HIV treatments.
 
 
 
