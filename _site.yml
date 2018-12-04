@@ -17,8 +17,10 @@ navbar:
       icon: fa-file-code-o
       href: https://github.com/tiffanyxi/p8105_final_hiv
     - text: "Final website repo"
-      icon: fa-file-text
+      icon: fa-github fa-lg
       href: https://github.com/litianapp/p8105_final_hiv.github.io
+    - icon: fa-envelope fa-lg
+      href: mailto:<hx2263@columbia.edu>
 output:
   html_document:
     theme: flatly
