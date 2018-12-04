@@ -38,7 +38,7 @@ Data reported to the HIV Epidemiology and Field Services Program by June 30, 201
 
 **PUMS data wrangling:**
 
-The raw dataset is super large with hundreds of variables, so we select it based on our target variables - location and total person income. The selected dataset is saved as “[selected_pums.csv](./data/selected_pums.csv)” in the data folder under our R project.
+The raw dataset is super large with hundreds of variables, so we select it based on our target variables - location and total person income. The selected dataset is saved as “[selected_pums.csv](https://drive.google.com/uc?authuser=0&id=1KZ5B9XiLsRQPKg4UostomjFLmBazi7xZ&export=download)” in the data folder under our R project.
 The location data from 2011 ACS is based on Public Use Microdata Area Code (PUMA) 2000, while the definition for PUMA 2000 is nowhere to be found. This is why we exclude the income data from 2011.  
   
 For the 2012-2015 PUMS data, we transfer the PUMA 2010 into zipcode for a better visualization on the NYC map. The transform is based on the following two datasets.
